@@ -56,9 +56,14 @@ public class Main {
 		
 		/* Autowire */
 		
-		Unit rusL3WarriorUnit = (Unit) context.getBean("russian_l3_warrior_unit");
-		rusL3WarriorUnit.show();
-		rusL3WarriorUnit.testActions();
+//		Unit rusL3WarriorUnit = (Unit) context.getBean("russian_l3_warrior_unit");
+//		rusL3WarriorUnit.show();
+//		rusL3WarriorUnit.testActions();
+
+		House house2 = (House) context.getBean("house2");
+		Unit warriorUnit = house2.createUnit();
+		warriorUnit.testActions();
+
 	}
 
 }

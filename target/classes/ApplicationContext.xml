@@ -14,7 +14,12 @@
 		depends-on="play_field">
 		<lookup-method name="createUnit" bean="peasant_unit"/>
 	</bean>
-	
+
+	<bean id="house2" class="org.tyaa.springcontextdemo2.implementations.House"
+		  depends-on="play_field">
+		<lookup-method name="createUnit" bean="warriorPool"/>
+	</bean>
+
 	<bean id="warriorPool" class="org.tyaa.springcontextdemo2.implementations.WarriorPool"
 		depends-on="play_field">
 		<property name="unitCollection">
@@ -22,27 +27,26 @@
 				<ref bean="warrior_unit"/>
 				<bean class="org.tyaa.springcontextdemo2.builder.Unit"
 					parent="base_warrior_unit">
-					<constructor-arg type="org.tyaa.springcontextdemo2.interfaces.IPerson" ref="warrior" index="0"></constructor-arg>
-					<constructor-arg type="org.tyaa.springcontextdemo2.interfaces.ITool" ref="sword"  index="1"></constructor-arg>
+					<constructor-arg type="org.tyaa.springcontextdemo2.interfaces.IPerson" ref="warrior" index="0"/>
+					<constructor-arg type="org.tyaa.springcontextdemo2.interfaces.ITool" ref="sword" index="1"/>
 				</bean>
 				<bean class="org.tyaa.springcontextdemo2.builder.Unit"
 					parent="base_warrior_unit">
-					
-					<property name="level" value="2"></property>
-					<property name="nationality" value="Italian"></property>
-				</bean>
-				<null></null>
-				<bean class="org.tyaa.springcontextdemo2.builder.Unit"
-					  parent="base_warrior_unit">
 
-					<property name="level" value="2"></property>
-					<property name="nationality" value="Russian"></property>
+					<property name="level" value="2"/>
+					<property name="nationality" value="Italian"/>
 				</bean>
 				<bean class="org.tyaa.springcontextdemo2.builder.Unit"
 					  parent="base_warrior_unit">
 
-					<property name="level" value="3"></property>
-					<property name="nationality" value="italian"></property>
+					<property name="level" value="2"/>
+					<property name="nationality" value="Russian"/>
+				</bean>
+				<bean class="org.tyaa.springcontextdemo2.builder.Unit"
+					  parent="base_warrior_unit">
+
+					<property name="level" value="3"/>
+					<property name="nationality" value="italian"/>
 				</bean>
 			</list>
 		</property>
@@ -55,4 +59,14 @@
 		>
 		</constructor-arg>
 	</bean>
+
+	<bean id="warriorPoolLevel2" class="org.tyaa.springcontextdemo2.implementations.WarriorPool"
+		  depends-on="play_field">
+		<constructor-arg
+				value="#{warriorPool.unitCollection.?[level != null ? level == 2 : false]}"
+		>
+		</constructor-arg>
+	</bean>
+
+
 </beans>
